@@ -23,4 +23,17 @@ public class FarmService {
     return farmRepository.findAll();
 
   }
+
+  /**
+   * Find farm by id.
+   */
+  public List<FarmEntity> findFarmById(Long id) {
+    FarmEntity farm = farmRepository.findById(id).orElseThrow();
+
+    if (farm == null) {
+      throw new RuntimeException("Farm not found");
+    }
+
+    return farmRepository.findByid(id);
+  }
 }

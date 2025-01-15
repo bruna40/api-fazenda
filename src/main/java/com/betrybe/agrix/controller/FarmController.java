@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FarmController {
     
   private FarmService farmService;
-  
+
   /**
    * Constructor.
    */
@@ -49,8 +50,21 @@ public class FarmController {
   public List<FarmDto> getAllFarms() {
     List<FarmEntity> allFarms = farmService.getAll();
     return allFarms.stream()
-            .map(FarmDto::fromEntity)
+            .map(FarmDto::fromEntity)// convert entity to DTO
             .toList();
+  }
+
+  /**
+   * Find farm by id.
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<List<FarmEntity>> findFarmById(@PathVariable Long id) {
+    try {
+      List<FarmEntity> farm = farmService.findFarmById(id);
+      return ResponseEntity.ok(farm);
+    } catch (Exception e) {
+      return ResponseEntity.notFound().build();
+    }
   }
 
 }
