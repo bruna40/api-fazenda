@@ -2,6 +2,7 @@ package com.betrybe.agrix.service;
 
 import com.betrybe.agrix.entity.FarmEntity;
 import com.betrybe.agrix.repository.FarmRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,10 @@ public class FarmService {
 
   public FarmEntity save(FarmEntity farm) {
     return farmRepository.save(farm);
+  }
+
+  public List<FarmEntity> getAll() {
+    return farmRepository.findAll();
+
   }
 }

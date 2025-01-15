@@ -1,10 +1,12 @@
 package com.betrybe.agrix.controller;
 
+import com.betrybe.agrix.dto.FarmDto;
 import com.betrybe.agrix.entity.FarmEntity;
 import com.betrybe.agrix.service.FarmService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/farms")
 public class FarmController {
     
-
-  @Autowired
   private FarmService farmService;
+  
+  /**
+   * Constructor.
+   */
+  public FarmController(FarmService farmService) {
+    this.farmService = farmService;
+  }
 
   /**
    * Save a farm.
@@ -33,6 +40,17 @@ public class FarmController {
     } catch (Exception e) {
       return ResponseEntity.badRequest().build();
     }
+  }
+
+  /**
+   * Get all farms.
+   */
+  @GetMapping
+  public List<FarmDto> getAllFarms() {
+    List<FarmEntity> allFarms = farmService.getAll();
+    return allFarms.stream()
+            .map(FarmDto::fromEntity)
+            .toList();
   }
 
 }

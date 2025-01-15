@@ -20,6 +20,9 @@ public class FarmEntity {
   private String name;
   private Double size;
 
+  public FarmEntity() {
+  }
+
   public FarmEntity(String name, Double size) {
     this.name = name;
     this.size = size;
