@@ -2,6 +2,7 @@ package com.betrybe.agrix.controller;
 
 import com.betrybe.agrix.dto.FarmDto;
 import com.betrybe.agrix.entity.FarmEntity;
+import com.betrybe.agrix.exceptions.FarmNotFoundException;
 import com.betrybe.agrix.service.FarmService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -58,13 +59,10 @@ public class FarmController {
    * Find farm by id.
    */
   @GetMapping("/{id}")
-  public ResponseEntity<List<FarmEntity>> findFarmById(@PathVariable Long id) {
-    try {
-      List<FarmEntity> farm = farmService.findFarmById(id);
-      return ResponseEntity.ok(farm);
-    } catch (Exception e) {
-      return ResponseEntity.notFound().build();
-    }
+  public ResponseEntity<FarmEntity> findFarmById(@PathVariable Long id) {
+  
+    FarmEntity farm = farmService.getFarmById(id);
+    return ResponseEntity.ok().body(farm);
   }
 
 }

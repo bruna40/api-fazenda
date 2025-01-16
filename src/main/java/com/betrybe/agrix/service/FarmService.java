@@ -1,6 +1,7 @@
 package com.betrybe.agrix.service;
 
 import com.betrybe.agrix.entity.FarmEntity;
+import com.betrybe.agrix.exceptions.FarmNotFoundException;
 import com.betrybe.agrix.repository.FarmRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,9 @@ public class FarmService {
   /**
    * Find farm by id.
    */
-  public List<FarmEntity> findFarmById(Long id) {
-    FarmEntity farm = farmRepository.findById(id).orElseThrow();
+  public FarmEntity getFarmById(Long id) {
 
-    if (farm == null) {
-      throw new RuntimeException("Farm not found");
-    }
-
-    return farmRepository.findByid(id);
+    return farmRepository.findById(id)
+           .orElseThrow(FarmNotFoundException::new);
   }
 }
