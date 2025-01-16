@@ -20,6 +20,8 @@ public class FarmEntity {
   private String name;
   private Double size;
 
+
+
   public FarmEntity() {
   }
 
@@ -48,4 +50,5 @@ public class FarmEntity {
   public void setSize(Double size) {
     this.size = size;
   }
+
 }

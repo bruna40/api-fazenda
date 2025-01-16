@@ -1,8 +1,12 @@
 package com.betrybe.agrix.controller;
 
+import com.betrybe.agrix.dto.CreateCropsDto;
+import com.betrybe.agrix.dto.CropsDto;
 import com.betrybe.agrix.dto.FarmDto;
+import com.betrybe.agrix.entity.CropsEntity;
 import com.betrybe.agrix.entity.FarmEntity;
 import com.betrybe.agrix.exceptions.FarmNotFoundException;
+import com.betrybe.agrix.service.CropsService;
 import com.betrybe.agrix.service.FarmService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -64,5 +68,15 @@ public class FarmController {
     FarmEntity farm = farmService.getFarmById(id);
     return ResponseEntity.ok().body(farm);
   }
+
+  @PostMapping("/{id}/crops")
+  public ResponseEntity<CropsDto> createCrops(
+      @PathVariable Long id,
+      @RequestBody CreateCropsDto cropsEntity
+  ) throws FarmNotFoundException {
+    CropsDto createCrops = CropsDto.fromEntity(farmService.createCrop(cropsEntity.toEntity(), id));
+    return ResponseEntity.status(HttpStatus.CREATED).body(createCrops);
+  }
+  
 
 }
