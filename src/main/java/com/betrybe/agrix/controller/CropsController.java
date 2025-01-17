@@ -1,6 +1,7 @@
 package com.betrybe.agrix.controller;
 
 import com.betrybe.agrix.dto.CropsDto;
+import com.betrybe.agrix.entity.CropsEntity;
 import com.betrybe.agrix.service.CropsService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,8 @@ public class CropsController {
   
   @GetMapping("/{id}")
   public CropsDto getCropById(@PathVariable Long id) {
-    return cropsService.getById(id);
+    CropsEntity cropsEntity = cropsService.getById(id);
+    return CropsDto.fromEntity(cropsEntity);
   }
   
 }

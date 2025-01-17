@@ -1,6 +1,7 @@
 package com.betrybe.agrix.service;
 
 import com.betrybe.agrix.dto.CropsDto;
+import com.betrybe.agrix.entity.CropsEntity;
 import com.betrybe.agrix.exceptions.CropsNotFoundException;
 import com.betrybe.agrix.repository.CropsRepository;
 import java.util.List;
@@ -22,9 +23,8 @@ public class CropsService {
     return CropsDto.fromEntityList(cropsRepository.findAll());
   }
 
-  public CropsDto getById(Long id) throws CropsNotFoundException {
-    return CropsDto
-      .fromEntity(cropsRepository.findById(id).orElseThrow(CropsNotFoundException::new));
+  public CropsEntity getById(Long id) throws CropsNotFoundException {
+    return cropsRepository.findById(id).orElseThrow(CropsNotFoundException::new);
   }
 
 }
