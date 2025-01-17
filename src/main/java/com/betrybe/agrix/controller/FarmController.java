@@ -77,4 +77,9 @@ public class FarmController {
   }
   
 
+  @GetMapping("/{id}/crops")
+  public List<CropsDto> getAllCropsFromFarm(@PathVariable Long id) {
+    return farmService.getAllCropsFromFarm(id);
+  }
+
 }

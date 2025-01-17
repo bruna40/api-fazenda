@@ -22,7 +22,7 @@ public class CropsService {
     return CropsDto.fromEntityList(cropsRepository.findAll());
   }
 
-  public CropsDto getById(Long id) {
+  public CropsDto getById(Long id) throws CropsNotFoundException {
     return CropsDto
       .fromEntity(cropsRepository.findById(id).orElseThrow(CropsNotFoundException::new));
   }

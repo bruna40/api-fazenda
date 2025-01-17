@@ -1,5 +1,7 @@
 package com.betrybe.agrix.service;
 
+import com.betrybe.agrix.dto.CropsDto;
+import com.betrybe.agrix.dto.FarmDto;
 import com.betrybe.agrix.entity.CropsEntity;
 import com.betrybe.agrix.entity.FarmEntity;
 import com.betrybe.agrix.exceptions.FarmNotFoundException;
@@ -52,5 +54,17 @@ public class FarmService {
     return cropsRepository.save(cropsEntity);
   }
 
+  /**
+   * Get all crops from a farm.
+   */
+  public List<CropsDto> getAllCropsFromFarm(Long farmId) {
+    FarmEntity farmEntity = getFarmById(farmId);
+
+    FarmDto farmDto = FarmDto.fromEntity(farmEntity);
+
+    return CropsDto.fromEntityList(cropsRepository.findAllByFarmId(farmDto.id()));
+    
+    
+  }
 
 }

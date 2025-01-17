@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CropsRepository extends JpaRepository<CropsEntity, Long> {
   List<CropsEntity> findByid(Long id);
+  
+  List<CropsEntity> findAllByFarmId(Long farmId);
 }
